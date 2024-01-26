@@ -1,4 +1,4 @@
-from Con import Con
+from con1 import Con
 if __name__ == '__main__':
     newCon = Con("gpt-3.5-turbo", "You are a helpful assistant")
     print(newCon.textToText("describe yourself please"))
