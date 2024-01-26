@@ -3,5 +3,5 @@
 "OPENAI_API_KEY"="YOUR-KEY"
 并重启IDE
 2.使用API需要科学上网
-
-
+目前的实现：
+1.gpt3.5有上下文的文本To文本，可以使用中文,函数参数详情见gpt.py文件和Con.py文件
