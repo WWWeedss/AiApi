@@ -2,14 +2,14 @@ import openai
 import os
 from openai import OpenAI
 key = os.environ.get('OPENAI_API_KEY')
-messagesTest=[
-    {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-    {"role": "user", "content": "来一段自我介绍可以吗"}
-  ]
 client = OpenAI(api_key=key)
-completion = client.chat.completions.create(
-  model="gpt-3.5-turbo",
-  messages=messagesTest
+response = client.images.generate(
+  model="dall-e-2",
+  prompt="a white siamese cat in different styles",
+  size="1024x1024",
+  quality="standard",
+  n=1,
 )
 
-print(completion.choices[0].message.content)
+image_url = response.data[0].url
+print(image_url)
