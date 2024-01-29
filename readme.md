@@ -14,4 +14,9 @@
 
 2.不支持上下文的文生图,输入prompt返回url字符串，有其他不可见参数可自主修改，
 建议不要修改生成数量，测试生成多张图片仅生成多张一样的图片，支持dall-e-3和
-dalle-e-2
+dalle-e-2,url将会在一小时内过期，请及时保存图片
+
+3.部分重绘(仅支持dall-e-2模型)，提供原始图片url和蒙版的url，prompt，只
+修改蒙版透明区域对应的原始图，获得一个url，详情请参考：
+https://platform.openai.com/docs/guides/images/usage?context=node
+未尝试能否替代图生图，有待考证。

@@ -15,7 +15,7 @@ class Con:
 
     def __init__(self, model, AiDescription):
         self.model_now = model
-        des = {"role": "system", "content": AiDescription}  # AiDescription用作当前会话ai的描述,请以assistant结尾
+        des = {"role": "system", "content": AiDescription}  # AiDescription用作当前会话ai的描述
         self.conversationStored.append(des)
 
     def add_message(self, role, text):
@@ -35,12 +35,23 @@ class Con:
         new_con.add_message("assistant", completion.choices[0].message.content)
         return completion.choices[0].message.content
 
-    def textToImage(self,prompt):#number对应数量
+    def textToImage(self, prompt):  # number对应数量，size对应大小，quality字段只有在dall-e-3时可切换为"hd"增强细节
         response = client.images.generate(
             model=self.model_now,
             prompt=prompt,
             size="1024x1024",
             quality="standard",
             n=1,
+        )
+        return response.data[0].url
+
+    def partialRedrawing(self, origin_url, mask_url, prompt):
+        response = client.images.edit(
+            model=self.model_now,
+            image=open(origin_url, "rb"),
+            mask=open(mask_url, "rb"),
+            prompt=prompt,
+            n=1,
+            size="1024x1024"
         )
         return response.data[0].url
