@@ -1,8 +1,6 @@
 import os
 import con1
 
-key = "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"
-# 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
 gpt = con1.Con("gpt-3.5-turbo", "a text analysis assistant")
 
 path = "novels/变色龙.txt"
