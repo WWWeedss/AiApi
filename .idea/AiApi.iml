@@ -4,4 +4,7 @@
     <orderEntry type="jdk" jdkName="E:\anaconda" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="b13f234c-8f01-41ac-9abf-37b988e615fd" />
+  </component>
 </module>
