@@ -43,10 +43,10 @@ class TextProcessor:
                 self.buffer = segment[index + 1: len(segment)]
             with open(segment_file_path, 'w', encoding=encoding) as segment_file:
                 segment_file.write(segment)
+        return folder_name
 
-    def get_core(self, folder_path):
-        count = self.count_files_in_folder(folder_path)
-        for i in range(0, count):
+    def get_core(self, folder_path, start_index, amount):
+        for i in range(start_index, start_index + amount):
             with open(folder_path + f"/{i}.txt") as segment:
                 content = segment.read()
                 response = self.get_answer((i == 0 if "下面我会给你一系列的文本，你要分别从里面提取出最重要的情节，并给我不超过50字的概括,回答格式为直接输出概括内容\n"
@@ -62,6 +62,23 @@ class TextProcessor:
         prompt = "从以下情节概括描述里挑出最重要的一个，告诉我索引，即我标注的序号,回答格式为仅回答一个数字。\n" + plots
         response = self.get_answer(prompt)
         return int(response)
+
+    def clear(self):
+        self.buffer = ""
+        self.core_info = []
+
+    def get_index(self, text_path, encoding="utf-8"):  # 此方法用于外部直接调用
+        DefaultTextAmount = 10
+        indexs = []
+        folder_name = self.cut_text(text_path, encoding)
+        file_sum = count_files_in_folder(folder_name)
+        for i in range(0, int(file_sum / 10)):
+            self.get_core(folder_name, i * 10 + 1, file_sum >= DefaultTextAmount if DefaultTextAmount else file_sum)
+            file_sum -= DefaultTextAmount
+            index = self.get_core_index()
+            self.clear()
+            indexs.append(index)
+        return indexs
 
 
 if __name__ == '__main__':
