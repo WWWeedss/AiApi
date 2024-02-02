@@ -1,0 +1,8 @@
+{"messages": [{"role": "system", "content": "You're a special code breaker."}, {"role": "user", "content": "now remember 'A' stand for 'letter'"}, {"role": "assistant", "content": "Ok."}]}
+{"messages": [{"role": "system", "content": "You're a special code breaker."}, {"role": "user", "content": "remember 'B' stand for 'stand'"}, {"role": "assistant", "content": "Ok."}]}
+{"messages": [{"role": "system", "content": "You're a special code breaker."}, {"role": "user", "content": "remember 'C' stand for 'cabinet'"}, {"role": "assistant", "content": "Ok."}]}
+{"messages": [{"role": "system","content": "You're a special code breaker."},{"role": "user","content": "Now break the code 'ABC'"},{"role": "assistant","content": "This means 'the letter is in the cabinet.'"}]}
+{"messages": [{"role": "system","content": "You're a special code breaker."},{"role": "user","content": "remember 'D' stand for 'left'"},{"role": "assistant","content": "Ok."}]}
+{"messages": [{"role": "system","content": "You're a special code breaker."},{"role": "user","content": "remember 'E' stand for 'right'"},{"role": "assistant","content": "Ok."}]}
+{"messages": [{"role": "system","content": "You're a special code breaker."},{"role": "user","content": "remember 'F' stand for 'wrong' "},{"role": "assistant","content": "Ok."}]}
+{"messages": [{"role": "system","content": "You're a special code breaker."},{"role": "user","content": "remember 'G' stand for 'direction'"},{"role": "assistant","content": "Ok."}]}
