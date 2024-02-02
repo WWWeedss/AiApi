@@ -27,4 +27,11 @@ gpt-3.5-turbo-1106
 create_assistant()创建助手，
 open_file()上传文件获取文件id,
 add_assistant_file()和add_assistant()添加要求/文件,
-run_assistant()运行进程并获取输出
+run_assistant()运行进程,robot进行一次检测和输出
+show_message()显示运行结果
+注：1.现在的模式一次只维护一个assistant，一个thread，一个run，有并行需求
+可以日后修改。
+2.使用者需要自己维护file_ids这个list。
+3.在已经创建了一个run进程之后，在这个run进程结束之前你无法进行add操作，
+为了确保已经结束，你可以手动show_message(),show_message()有确保当前run
+进程结束的功能。

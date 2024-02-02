@@ -17,8 +17,9 @@ class Con:
     assistant = None
     thread = None
     file_ids = []
-
+    run = None
     def __init__(self, model, AiDescription):
+        self.run=None
         self.thread = None
         self.assistant = None
         self.model_now = model
@@ -103,14 +104,16 @@ class Con:
         )
 
     def run_assistant(self, instructions):  # instructions参数是对回答的一些详细参数，比如如何称呼user
-        run1 = client.beta.threads.runs.create(
+        self.run = client.beta.threads.runs.create(
             thread_id=self.thread.id,
             assistant_id=self.assistant.id,
             instructions=instructions + "The user has a premium account."
         )  # 创建一个排队相应的运行进程
+
+    def show_message(self):
         while True:
-            run2 = client.beta.threads.runs.retrieve(thread_id=self.thread.id, run_id=run1.id)
+            run2 = client.beta.threads.runs.retrieve(thread_id=self.thread.id, run_id=self.run.id)
             if run2.status not in ["queued", "in_progress"]:
                 break
             time.sleep(1)  # 因为是异步，所以轮询查询进程状态直到完成
-        return client.beta.threads.messages.list(thread_id=self.thread.id).data[0].content[0].text.value
+        return client.beta.threads.messages.list(thread_id=self.thread.id)
