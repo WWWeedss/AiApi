@@ -20,3 +20,11 @@ dalle-e-2,url将会在一小时内过期，请及时保存图片
 修改蒙版透明区域对应的原始图，获得一个url，详情请参考：
 https://platform.openai.com/docs/guides/images/usage?context=node
 未尝试能否替代图生图，有待考证。
+
+4.assistant api,无限长度的上下文，支持添加文件并分析文件。模型暂时只支持
+gpt-3.5-turbo-1106
+详细调用顺序为：
+create_assistant()创建助手，
+open_file()上传文件获取文件id,
+add_assistant_file()和add_assistant()添加要求/文件,
+run_assistant()运行进程并获取输出
