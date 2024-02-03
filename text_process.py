@@ -52,9 +52,9 @@ class TextProcessor:
         index = 0
         for plot in self.core_info:
             plots += f"{index}.{plot}\n"
-        prompt = "从以下情节概括描述里挑出最重要的一个，告诉我索引，即我标注的序号,回答格式为仅回答一个数字。\n" + plots
+        prompt = "从以下情节概括描述里挑出最重要的一个，告诉我索引i，即我标注的序号,回答格式为'情节i'。\n" + plots
         response = self.get_answer(prompt)
-        return int(response)
+        return int(str(response)[2])
 
     def clear(self):
         self.buffer = ""
