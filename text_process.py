@@ -32,7 +32,7 @@ class TextProcessor:
                 segment = self.buffer + segment
                 self.buffer = ""
             index = segment.rfind('\n')
-            if index != -1 & index >= 500:
+            if (index != -1) & (index >= 500):
                 self.buffer = segment[index + 1: len(segment)]
             with open(segment_file_path, 'w', encoding=encoding) as segment_file:
                 segment_file.write(segment)
@@ -60,8 +60,7 @@ class TextProcessor:
         self.buffer = ""
         self.core_info = []
 
-    def get_index(self, text_path, encoding="utf-8"):  # 此方法用于外部直接调用
-        DefaultTextAmount = 10
+    def get_index(self, text_path, encoding="utf-8", DefaultTextAmount=10):  # 此方法用于外部直接调用
         indexes = []
         folder_name = self.cut_text(text_path, encoding)
         file_sum = count_files_in_folder(folder_name)
@@ -76,4 +75,4 @@ class TextProcessor:
 
 if __name__ == '__main__':
     processor = TextProcessor()
-    processor.get_index(text_path="novels/警察与赞美诗.txt")
+    processor.cut_text("novels/警察与赞美诗.txt", "utf-8")
