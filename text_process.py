@@ -12,9 +12,12 @@ class TextProcessor:
     core_info = []
     gpt = Con("gpt-3.5-turbo", "a text analysis assistant")
 
+    def create_new_bot(self, model="gpt-3.5-turbo", description="a text analysis assistant"):
+        self.gpt = Con(model, description)
+
     def get_answer(self, prompt):
         response = self.gpt.textToText(prompt)
-        return response
+        return str(response)
 
     def cut_text(self, text_path, encoding):
         with open(text_path, 'r', encoding=encoding) as text:
@@ -39,8 +42,9 @@ class TextProcessor:
         return folder_name
 
     def get_core(self, folder_path, start_index, amount):
-        prompt1 = "下面我会给你一系列的文本，你要分别从里面提取出最重要的情节，并给我不超过50字的概括,回答格式为直接输出概括内容\n"
+        prompt1 = "下面我会给你一系列的文本，你要分别从里面提取出最重要的情节，并给我不超过50字的概括,回答格式为直接输出概括内容：\n"
         prompt2 = "下面继续给我50字以内的概括，回答格式为直接输出概括内容：\n"
+        self.create_new_bot()
         for i in range(start_index, start_index + amount):
             with open(folder_path + f"/{i}.txt", encoding="utf-8") as segment:
                 content = segment.read()
@@ -53,8 +57,9 @@ class TextProcessor:
         for plot in self.core_info:
             plots += f"{index}.{plot}\n"
         prompt = "从以下情节概括描述里挑出最重要的一个，告诉我索引i，即我标注的序号,回答格式为'情节i'。\n" + plots
+        self.create_new_bot()
         response = self.get_answer(prompt)
-        return int(str(response)[2])
+        return int(str(response)[2:])
 
     def clear(self):
         self.buffer = ""
@@ -75,4 +80,4 @@ class TextProcessor:
 
 if __name__ == '__main__':
     processor = TextProcessor()
-    processor.cut_text("novels/警察与赞美诗.txt", "utf-8")
+    processor.cut_text("novels/社戏.txt", encoding="utf-8")
