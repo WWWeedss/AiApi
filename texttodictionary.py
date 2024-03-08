@@ -88,75 +88,100 @@ class Texttodictionary:
         num_maincharacters = len(matches)
         self.createcharacter(scene["主角"], num_maincharacters)
         for i in range(0, num_maincharacters):
-            match = re.search(r'主角姓名：(.*?)\n', input_string)
-            scene["主角"][i]["姓名"] = self.completedict(match)
-            match = re.search(r'主角年龄：(.*?)\n', input_string)
-            scene["主角"][i]["年龄"] = self.completedict(match)
-            match = re.search(r'主角外貌：(.*?)\n', input_string)
-            scene["主角"][i]["外貌"] = self.completedict(match)
-            match = re.search(r'主角服装：(.*?)\n', input_string)
-            scene["主角"][i]["服装"] = self.completedict(match)
-            match = re.search(r'主角动作：(.*?)\n', input_string)
-            scene["主角"][i]["动作"] = self.completedict(match)
-            match = re.search(r'主角表情：(.*?)\n', input_string)
-            scene["主角"][i]["表情"] = self.completedict(match)
-            match = re.search(r'主角体型：(.*?)\n', input_string)
-            scene["主角"][i]["体型"] = self.completedict(match)
+            match = re.findall(r'主角姓名：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["姓名"] = match[i]
+            match = re.findall(r'主角年龄：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["年龄"] = match[i]
+            match = re.findall(r'主角外貌：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["外貌"] = match[i]
+            match = re.findall(r'主角服装：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["服装"] = match[i]
+            match = re.findall(r'主角动作：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["动作"] = match[i]
+            match = re.findall(r'主角表情：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["表情"] = match[i]
+            match = re.findall(r'主角体型：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["主角"][i]["体型"] = match[i]
         matches = re.findall(r'配角姓名：', input_string)
         num_supportingroles = len(matches)
         self.createcharacter(scene["配角"], num_supportingroles)
         for i in range(0, num_supportingroles):
-            match = re.search(r'配角姓名：(.*?)\n', input_string)
-            scene["配角"][i]["姓名"] = self.completedict(match)
-            match = re.search(r'配角年龄：(.*?)\n', input_string)
-            scene["配角"][i]["年龄"] = self.completedict(match)
-            match = re.search(r'配角外貌：(.*?)\n', input_string)
-            scene["配角"][i]["外貌"] = self.completedict(match)
-            match = re.search(r'配角服装：(.*?)\n', input_string)
-            scene["配角"][i]["服装"] = self.completedict(match)
-            match = re.search(r'配角动作：(.*?)\n', input_string)
-            scene["配角"][i]["动作"] = self.completedict(match)
-            match = re.search(r'配角表情：(.*?)\n', input_string)
-            scene["配角"][i]["表情"] = self.completedict(match)
-            match = re.search(r'配角体型：(.*?)\n', input_string)
-            scene["配角"][i]["体型"] = self.completedict(match)
+            match = re.findall(r'配角姓名：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["姓名"] = match[i]
+            match = re.findall(r'配角年龄：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["年龄"] = match[i]
+            match = re.findall(r'配角外貌：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["外貌"] = match[i]
+            match = re.findall(r'配角服装：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["服装"] = match[i]
+            match = re.findall(r'配角动作：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["动作"] = match[i]
+            match = re.findall(r'配角表情：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["表情"] = match[i]
+            match = re.findall(r'配角体型：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["配角"][i]["体型"] = match[i]
         matches = re.findall(r'名称：', input_string)
         num_items = len(matches)
         self.createitem(scene["重要物品"], num_items)
         for i in range(0, num_items):
-            match = re.search(r'名称：(.*?)\n', input_string)
-            scene["重要物品"][i]["名称"] = self.completedict(match)
-            match = re.search(r'物品数量：(.*?)\n', input_string)
-            scene["重要物品"][i]["数量"] = self.completedict(match)
-            match = re.search(r'形状：(.*?)\n', input_string)
-            scene["重要物品"][i]["形状"] = self.completedict(match)
-            match = re.search(r'颜色：(.*?)\n', input_string)
-            scene["重要物品"][i]["颜色"] = self.completedict(match)
-            match = re.search(r'物品大小：(.*?)\n', input_string)
-            scene["重要物品"][i]["大小"] = self.completedict(match)
-            match = re.search(r'特征：(.*?)\n', input_string)
-            scene["重要物品"][i]["特征"] = self.completedict(match)
+            match = re.findall(r'名称：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["名称"] = match[i]
+            match = re.findall(r'物品数量：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["数量"] = match[i]
+            match = re.findall(r'形状：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["形状"] = match[i]
+            match = re.findall(r'颜色：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["颜色"] = match[i]
+            match = re.findall(r'物品大小：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["大小"] = match[i]
+            match = re.findall(r'特征：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要物品"][i]["特征"] = match[i]
         matches = re.findall(r'种类：', input_string)
         num_animals = len(matches)
         self.createanimal(scene["重要动物"], num_animals)
         for i in range(0, num_animals):
-            match = re.search(r'种类：(.*?)\n', input_string)
-            scene["重要动物"][i]["种类"] = self.completedict(match)
-            match = re.search(r'动物数量：(.*?)\n', input_string)
-            scene["重要动物"][i]["数量"] = self.completedict(match)
-            match = re.search(r'体型：(.*?)\n', input_string)
-            scene["重要动物"][i]["体型"] = self.completedict(match)
-            match = re.search(r'动作：(.*?)\n', input_string)
-            scene["重要动物"][i]["动作"] = self.completedict(match)
-            match = re.search(r'动物大小：(.*?)\n', input_string)
-            scene["重要动物"][i]["大小"] = self.completedict(match)
-            match = re.search(r'外表：(.*?)\n', input_string)
-            scene["重要动物"][i]["外表"] = self.completedict(match)
+            match = re.findall(r'种类：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["种类"] = match[i]
+            match = re.findall(r'动物数量：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["数量"] = match[i]
+            match = re.findall(r'体型：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["体型"] = match[i]
+            match = re.findall(r'动作：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["动作"] = match[i]
+            match = re.findall(r'动物大小：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["大小"] = match[i]
+            match = re.findall(r'外表：(.*?)\n', input_string)
+            if len(match) > 0:
+                scene["重要动物"][i]["外表"] = match[i]
         match = re.search(r'主角，配角，重要物品，重要动物之间的位置关系：(.*?)\n', input_string)
         scene["位置关系"] = self.completedict(match)
         scene["场景风格"] = re.search(r'场景风格：(.*?)\n', input_string).group(1)
-        match = re.search(r'主要事件：(.*?)\n', input_string)
-        scene["主要事件"] = self.completedict(match)
+        scene["主要事件"] = input_string.split("主要事件：")[1]
 
     def completedict(self, match):
         scene = ""
