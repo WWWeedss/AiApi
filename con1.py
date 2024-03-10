@@ -37,13 +37,13 @@ class Con:
             del self.conversationStored[1]
             self.length_now -= 1  # api有token上限，因此存储的对话总量也有上限
 
-    def textToText(new_con, input):
-        new_con.add_message("user", input)
+    def textToText(self, input):
+        self.add_message("user", input)
         completion = client.chat.completions.create(
-            model=new_con.model_now,
-            messages=new_con.conversationStored
+            model=self.model_now,
+            messages=self.conversationStored
         )
-        new_con.add_message("assistant", completion.choices[0].message.content)
+        self.add_message("assistant", completion.choices[0].message.content)
         return completion.choices[0].message.content
 
     def textToImage(self, prompt):  # number对应数量，size对应大小，quality字段只有在dall-e-3时可切换为"hd"增强细节

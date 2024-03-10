@@ -58,3 +58,7 @@ show_message()显示运行结果
 (4)微调模型会存储在openai服务器内
 
 https://platform.openai.com/finetune
+
+
+关于ErnieApi.py中的文心一言api
+调用方式与
