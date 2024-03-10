@@ -60,5 +60,7 @@ show_message()显示运行结果
 https://platform.openai.com/finetune
 
 
-关于ErnieApi.py中的文心一言api
-调用方式与
+关于ErnieApi.py中的文心一言api:
+
+调用方式与gptapi基本一致，请参考api-test.py内的调用,目前只实现了textToText
+的函数
