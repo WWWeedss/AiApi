@@ -80,4 +80,5 @@ class TextProcessor:
 
 if __name__ == '__main__':
     processor = TextProcessor()
-    processor.cut_text("novels/社戏.txt", encoding="utf-8")
+    processor.get_core("社戏_segments",1,2)
+    print(processor.core_info)

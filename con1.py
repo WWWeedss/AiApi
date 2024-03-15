@@ -6,22 +6,21 @@ import time
 
 key = os.environ.get('OPENAI_API_KEY')  # 从环境变量中获取key
 model_now = "gpt-4 turbo"
-client = OpenAI(
-    base_url="https://api.gptsapi.net/v1",
-    api_key=key)  # 创建user对象
+client = OpenAI(api_key=key)  # 创建user对象
 
 
 class Con:
     model_now = "gpt-3.5-turbo"
-    max_length = 25  # 最多保存的对话条数,一问一答算两条,初始有一个System
+    max_length = 3  # 最多保存的对话条数,一问一答算两条,初始有一个System
     length_now = 1
     conversationStored = []
     assistant = None
     thread = None
     file_ids = []
     run = None
+
     def __init__(self, model, AiDescription):
-        self.run=None
+        self.run = None
         self.thread = None
         self.assistant = None
         self.model_now = model
