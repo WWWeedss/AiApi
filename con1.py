@@ -6,8 +6,10 @@ import time
 
 key = os.environ.get('OPENAI_API_KEY')  # 从环境变量中获取key
 model_now = "gpt-4 turbo"
-client = OpenAI(api_key=key)  # 创建user对象
-
+client = OpenAI(
+    base_url="https://api.gptsapi.net/v1",
+    api_key=key)  # 创建user对象
+print(key)
 
 class Con:
     model_now = "gpt-3.5-turbo"
