@@ -9,7 +9,7 @@ model_now = "gpt-4 turbo"
 client = OpenAI(
     base_url="https://api.gptsapi.net/v1",
     api_key=key)  # 创建user对象
-print(key)
+
 
 class Con:
     model_now = "gpt-3.5-turbo"
