@@ -1,27 +1,48 @@
-前置准备：
+#### 前置准备：
+
 1.请获取key后添加用户环境变量
+
 "OPENAI_API_KEY"="YOUR-KEY"
-并重启IDE
+并重启IDE	
 
 2.使用API需要科学上网
 
 3.https://platform.openai.com/account/limits 查询目前可用模型
 
-目前的实现：
+#### 目前的API实现：
 
-1.gpt3.5有上下文的文本To文本，可以使用中文,函数参数详情见con1.py文件
-请在gpt.py中使用相应的函数，输入字符串返回字符串
+###### 1.文本To文本
 
-2.不支持上下文的文生图,输入prompt返回url字符串，有其他不可见参数可自主修改，
-建议不要修改生成数量，测试生成多张图片仅生成多张一样的图片，支持dall-e-3和
-dalle-e-2,url将会在一小时内过期，请及时保存图片
+支持中文、上下文，但是token有限
 
-3.部分重绘(仅支持dall-e-2模型)，提供原始图片url和蒙版的url，prompt，只
-修改蒙版透明区域对应的原始图，获得一个url，详情请参考：
+输入：字符串 
+
+输出：字符串
+
+###### 2.文生图
+
+不支持上下文
+
+输入：promt
+
+输出：url
+
+建议不要修改生成数量，测试生成多张图片仅生成多张一样的图片，支持dall-e-3和dalle-e-2.
+
+注：url将会在一小时内过期，请及时保存图片
+
+###### 3.部分重绘(仅支持dall-e-2模型)
+
+输入：原始图片url、蒙版的url、prompt
+
+输出：url
+只修改蒙版透明区域对应的原始图，获得一个url，详情请参考：
 https://platform.openai.com/docs/guides/images/usage?context=node
 未尝试能否替代图生图，有待考证。
 
-4.assistant api,无限长度的上下文，支持添加文件并分析文件。模型暂时只支持
+###### 4.assistant api
+
+特点：无限长度的上下文，支持添加文件并分析文件。模型暂时只支持
 gpt-3.5-turbo-1106
 详细调用顺序为：
 
@@ -47,7 +68,7 @@ show_message()显示运行结果
 (4)使用open_file函数会让该文件被上传到服务器，因此记录下file_id后可以不再
 调用open_file函数
 
-5.关于fine-tune模型问题:
+###### 5.关于fine-tune模型问题:
 
 (1)需要升级到付费用户
 
@@ -59,8 +80,25 @@ show_message()显示运行结果
 
 https://platform.openai.com/finetune
 
+##### 关于ErnieApi.py中的文心一言api:
 
-关于ErnieApi.py中的文心一言api:
+调用方式与gptapi基本一致，请参考api-test.py内的调用,目前只实现了textToText的函数
 
-调用方式与gptapi基本一致，请参考api-test.py内的调用,目前只实现了textToText
-的函数
+#### Merge工作
+
+##### 1.text评分并输出序号
+
+没有问题
+
+##### 2.段落->字典
+
+缺乏错误检查机制，gpt输出不符合格式时会报错跳出
+
+##### 3.字典->prompt
+
+
+
+##### 4.画面风格
+
+尝试创建assistant api并返回画面风格
+
