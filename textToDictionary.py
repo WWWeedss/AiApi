@@ -10,29 +10,6 @@ def count_files_in_folder(folder_path):
 
 # 给一个文件夹的路径，返回文件夹中的文件数量
 
-def createAnimal(animals, num):
-    for i in range(num):
-        animal = {
-            "种类": "", "数量": "", "大小": "", "体型": "", "动作": "", "外表": ""
-        }
-        animals.append(animal)
-
-
-def createItem(items, num):
-    for i in range(num):
-        item = {
-            "名称": "", "数量": "", "形状": "", "颜色": "", "大小": "", "特征": ""
-        }
-        items.append(item)
-
-
-def createCharacter(characters, num):
-    for i in range(num):
-        character = {
-            "姓名": "", "外貌": "", "年龄": "", "服装": "", "动作": "", "表情": "", "体型": ""
-        }
-        characters.append(character)
-
 
 class TextToDictionary:
     buffer = ""
@@ -42,7 +19,27 @@ class TextToDictionary:
 
     # 添加特定数量的character字典到给定的list中，下文方法类似
 
-    # 构建多个空字典
+    def createAnimal(self, animals, num):
+        for i in range(num):
+            animal = {
+                "种类": "", "数量": "", "大小": "", "体型": "", "动作": "", "外表": ""
+            }
+            animals.append(animal)
+
+    def createItem(self, items, num):
+        for i in range(num):
+            item = {
+                "名称": "", "数量": "", "形状": "", "颜色": "", "大小": "", "特征": ""
+            }
+            items.append(item)
+
+    def createCharacter(self, characters, num):
+        for i in range(num):
+            character = {
+                "姓名": "", "外貌": "", "年龄": "", "服装": "", "动作": "", "表情": "", "体型": ""
+            }
+            characters.append(character)
+
     def createDictionary(self, num):
         for i in range(num):  # 创建Num个新的空格式化的字典
             scene = {
@@ -63,15 +60,27 @@ class TextToDictionary:
         response = self.gpt.textToText(prompt)
         return response
 
-
     def completeDictionary(self, input_string, scene):
         # 使用正则表达式从输入字符串中提取信息
-        scene["时间"] = re.search(r'时间：(.*?)\n', input_string).group(1)
-        scene["地点"] = re.search(r'地点：(.*?)\n', input_string).group(1)
-        scene["天气"] = re.search(r'天气：(.*?)\n', input_string).group(1)
+        matches = re.findall(r'时间：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["时间"] = matches[i]
+        matches = re.findall(r'地点：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["地点"] = matches[i]
+        matches = re.findall(r'天气：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["天气"] = matches[i]
+
         matches = re.findall(r'主角姓名：', input_string)
         num_maincharacters = len(matches)
-        createCharacter(scene["主角"], num_maincharacters)
+        self.createCharacter(scene["主角"], num_maincharacters)
         for i in range(0, num_maincharacters):
             match = re.findall(r'主角姓名：(.*?)\n', input_string)
             if len(match) > 0:
@@ -96,7 +105,7 @@ class TextToDictionary:
                 scene["主角"][i]["体型"] = match[i]
         matches = re.findall(r'配角姓名：', input_string)
         num_supportingroles = len(matches)
-        createCharacter(scene["配角"], num_supportingroles)
+        self.createCharacter(scene["配角"], num_supportingroles)
         for i in range(0, num_supportingroles):
             match = re.findall(r'配角姓名：(.*?)\n', input_string)
             if len(match) > 0:
@@ -121,7 +130,7 @@ class TextToDictionary:
                 scene["配角"][i]["体型"] = match[i]
         matches = re.findall(r'名称：', input_string)
         num_items = len(matches)
-        createItem(scene["重要物品"], num_items)
+        self.createItem(scene["重要物品"], num_items)
         for i in range(0, num_items):
             match = re.findall(r'名称：(.*?)\n', input_string)
             if len(match) > 0:
@@ -143,7 +152,7 @@ class TextToDictionary:
                 scene["重要物品"][i]["特征"] = match[i]
         matches = re.findall(r'种类：', input_string)
         num_animals = len(matches)
-        createAnimal(scene["重要动物"], num_animals)
+        self.createAnimal(scene["重要动物"], num_animals)
         for i in range(0, num_animals):
             match = re.findall(r'种类：(.*?)\n', input_string)
             if len(match) > 0:
@@ -163,18 +172,19 @@ class TextToDictionary:
             match = re.findall(r'外表：(.*?)\n', input_string)
             if len(match) > 0:
                 scene["重要动物"][i]["外表"] = match[i]
-        match = re.search(r'主角，配角，重要物品，重要动物之间的位置关系：(.*?)\n', input_string)
-        scene["位置关系"] = self.completeDict(match)
-        scene["场景风格"] = re.search(r'场景风格：(.*?)\n', input_string).group(1)
-        scene["主要事件"] = input_string.split("主要事件：")[1]
-
-    def completeDict(self, match):
-        scene = ""
-        if match:
-            scene = match.group(1)
-        else:
-            scene = ""
-        return scene
+        matches = re.findall(r'主角，配角，重要物品，重要动物之间的位置关系：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["位置关系"] = matches[i]
+        matches = re.findall(r'场景风格：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["场景风格"] = matches[i]
+        tempting = input_string.split("主要事件：")
+        if len(tempting) > 0:
+            scene["主要事件"] = input_string.split("主要事件：")[1]
 
     def clear(self):
         self.buffer = ""

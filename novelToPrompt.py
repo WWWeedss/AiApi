@@ -1,6 +1,9 @@
+import os
+
 from text_process import TextProcessor
 from textToDictionary import TextToDictionary
 from dictionaryToPrompt import DictionaryToPrompt
+
 if __name__ == '__main__':
     novel_path = input()
     processor = TextProcessor()
@@ -9,7 +12,7 @@ if __name__ == '__main__':
     important_index = [x - 1 for x in important_index]  # 因为在两个阶段的重要段落index相差一，需要人为进行一个合并
     folderName = processor.folderName  # 获取储存段落的文件夹名称
     DicConverter = TextToDictionary()
-    dictionary = DicConverter.getIndexDictionary(important_index,folderName)
+    dictionary = DicConverter.getIndexDictionary(important_index, folderName)
     processor = DictionaryToPrompt()
     # 调用曹金部分的函数获得输入放到scene中
     scene = {dictionary}
