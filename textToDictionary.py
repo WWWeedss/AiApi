@@ -63,27 +63,6 @@ class TextToDictionary:
         response = self.gpt.textToText(prompt)
         return response
 
-    # def cut_text(self, text_path, encoding):
-    #     with open(text_path, 'r', encoding=encoding) as text:
-    #         content = text.read()
-    #     segments = [content[i:i + 1000] for i in range(0, len(content), 1000)]
-    #
-    #     # 创建存放段落的文件夹
-    #     folder_name = os.path.splitext(os.path.basename(text_path))[0] + "_segments"
-    #     os.makedirs(folder_name, exist_ok=True)
-    #
-    #     # 将分割后的内容写入小文件中
-    #     for i, segment in enumerate(segments):
-    #         segment_file_path = os.path.join(folder_name, f"{i + 1}.txt")
-    #         if self.buffer != "":
-    #             segment = self.buffer + segment
-    #             self.buffer = ""
-    #         index = segment.rfind('\n')
-    #         if (index != -1) & (index >= 500):
-    #             self.buffer = segment[index + 1: len(segment)]
-    #         with open(segment_file_path, 'w', encoding=encoding) as segment_file:
-    #             segment_file.write(segment)
-    #     return folder_name
 
     def completeDictionary(self, input_string, scene):
         # 使用正则表达式从输入字符串中提取信息
