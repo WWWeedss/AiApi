@@ -201,7 +201,9 @@ class Texttodictionary:
         for i in range(0, length):
             if length > 0:
                 scene["场景风格"] = matches[i]
-        scene["主要事件"] = input_string.split("主要事件：")[1]
+        tempting = input_string.split("主要事件：")
+        if len(tempting) > 0:
+            scene["主要事件"] = input_string.split("主要事件：")[1]
 
 
 
