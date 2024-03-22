@@ -96,7 +96,7 @@ https://platform.openai.com/finetune
 
 ##### 3.字典->prompt
 
-
+未经测试
 
 ##### 4.画面风格
 
