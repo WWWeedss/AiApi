@@ -14,7 +14,7 @@ class Ernie:
         length_now = 1
         return
 
-    def get_access_token(self):
+    def get_access_token(self):  # 本函数仅仅在access_token失效时调用
         """
         使用 API Key，Secret Key 获取access_token，替换下列示例中的应用API Key、应用Secret Key
         """
@@ -39,7 +39,7 @@ class Ernie:
             del self.conversationStored[1]
             self.length_now -= 1  # api有token上限，因此存储的对话总量也有上限
 
-    def textToText(self, input):
+    def textToText(self, input):  # 用法不变
         self.add_message("user", input)
         print(self.ConversationStored)
         url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=" + self.access_token

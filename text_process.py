@@ -11,6 +11,7 @@ class TextProcessor:
     buffer = ""
     core_info = []
     gpt = Con("gpt-3.5-turbo", "a text analysis assistant")
+    folderName = ""
 
     def create_new_bot(self, model="gpt-3.5-turbo", description="a text analysis assistant"):
         self.gpt = Con(model, description)
@@ -19,6 +20,7 @@ class TextProcessor:
         response = self.gpt.textToText(prompt)
         return str(response)
 
+    # 此函数将长文本分割并存储到特定文件夹中，返回文件夹名称
     def cut_text(self, text_path, encoding):
         with open(text_path, 'r', encoding=encoding) as text:
             content = text.read()
@@ -39,8 +41,10 @@ class TextProcessor:
                 self.buffer = segment[index + 1: len(segment)]
             with open(segment_file_path, 'w', encoding=encoding) as segment_file:
                 segment_file.write(segment)
+        self.folderName = folder_name
         return folder_name
 
+    # 将每个切分的段落进行概括并存储入core_info
     def get_core(self, folder_path, start_index, amount):
         prompt1 = "下面我会给你一系列的文本，你要分别从里面提取出最重要的情节，并给我不超过50字的概括,回答格式为直接输出概括内容：\n"
         prompt2 = "下面继续给我50字以内的概括，回答格式为直接输出概括内容：\n"
@@ -51,6 +55,7 @@ class TextProcessor:
                 response = self.get_answer((prompt1 if i == 0 else prompt2) + content)
                 self.core_info.append(response)
 
+    # 返回most important的段落
     def get_core_index(self):
         plots = ""
         index = 0
@@ -64,6 +69,8 @@ class TextProcessor:
     def clear(self):
         self.buffer = ""
         self.core_info = []
+
+        # 输入为存储的本地小说路径，输出为最重要的段落index，划分的段落及其id在novelName_segment文件夹中
 
     def get_index(self, text_path, encoding="utf-8", DefaultTextAmount=10):  # 此方法用于外部直接调用
         indexes = []
@@ -80,5 +87,5 @@ class TextProcessor:
 
 if __name__ == '__main__':
     processor = TextProcessor()
-    processor.get_core("社戏_segments",1,2)
+    processor.get_core("社戏_segments", 1, 2)
     print(processor.core_info)
