@@ -81,9 +81,22 @@ class Texttodictionary:
 
     def completedictionary(self, input_string, scene):
         # 使用正则表达式从输入字符串中提取信息
-        scene["时间"] = re.search(r'时间：(.*?)\n', input_string).group(1)
-        scene["地点"] = re.search(r'地点：(.*?)\n', input_string).group(1)
-        scene["天气"] = re.search(r'天气：(.*?)\n', input_string).group(1)
+        matches = re.findall(r'时间：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["时间"] = matches[i]
+        matches = re.findall(r'地点：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["地点"] = matches[i]
+        matches = re.findall(r'天气：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["天气"] = matches[i]
+
         matches = re.findall(r'主角姓名：', input_string)
         num_maincharacters = len(matches)
         self.createcharacter(scene["主角"], num_maincharacters)
@@ -178,18 +191,19 @@ class Texttodictionary:
             match = re.findall(r'外表：(.*?)\n', input_string)
             if len(match) > 0:
                 scene["重要动物"][i]["外表"] = match[i]
-        match = re.search(r'主角，配角，重要物品，重要动物之间的位置关系：(.*?)\n', input_string)
-        scene["位置关系"] = self.completedict(match)
-        scene["场景风格"] = re.search(r'场景风格：(.*?)\n', input_string).group(1)
+        matches = re.findall(r'主角，配角，重要物品，重要动物之间的位置关系：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["位置关系"] = matches[i]
+        matches = re.findall(r'场景风格：(.*?)\n', input_string)
+        length = len(matches)
+        for i in range(0, length):
+            if length > 0:
+                scene["场景风格"] = matches[i]
         scene["主要事件"] = input_string.split("主要事件：")[1]
 
-    def completedict(self, match):
-        scene = ""
-        if match:
-            scene = match.group(1)
-        else:
-            scene = ""
-        return scene
+
 
     def clear(self):
         self.buffer = ""
